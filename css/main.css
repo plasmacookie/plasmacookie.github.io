@@ -1168,7 +1168,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #0e17ff;
+  background: #6f57ee;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2558,9 +2558,9 @@ ul.breadcrumb li + li:last-child {
 }
 @media screen and (min-width: 1080px) {
   .header {
-    width: 63%;
+    width: 65%;
   }
   .container .main-inner {
-    width: 63%;
+    width: 65%;
   }
 }
