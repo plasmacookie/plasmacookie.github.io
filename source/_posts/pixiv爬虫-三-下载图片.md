@@ -2,7 +2,7 @@
 title: pixiv爬虫(三) 下载图片
 date: 2021-09-15 18:00:09
 categories:
-- 俯听一树新绿
+- 技术
 tags:
 - pixiv爬虫
 - 爬虫
