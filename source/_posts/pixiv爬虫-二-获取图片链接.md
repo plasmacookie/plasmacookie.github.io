@@ -7,6 +7,7 @@ tags:
 - pixiv爬虫
 - 爬虫
 - python
+description: python写pixiv爬虫的教程的第二篇。进行搜索并获取搜索到的图片链接。
 ---
 # 准备工作  
 这一集的目的是获取搜索到的所有图片链接  

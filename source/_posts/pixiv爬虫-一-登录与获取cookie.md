@@ -7,6 +7,7 @@ tags:
 - pixiv爬虫
 - 爬虫
 - python
+description: python写pixiv爬虫的教程的第一篇。登录操作。
 ---
 # 前言
 这就是pixiv爬虫的重制版啦！  
