@@ -2,7 +2,7 @@
 title: pixiv爬虫(三) 下载图片
 date: 2021-09-15 18:00:09
 categories:
-- 技术
+- 技术学习
 tags:
 - pixiv爬虫
 - 爬虫

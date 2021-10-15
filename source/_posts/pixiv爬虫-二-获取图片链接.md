@@ -2,7 +2,7 @@
 title: pixiv爬虫(二) 获取图片链接
 date: 2021-09-15 17:53:21
 categories:
-- 技术
+- 技术学习
 tags:
 - pixiv爬虫
 - 爬虫
