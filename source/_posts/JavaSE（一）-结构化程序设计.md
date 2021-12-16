@@ -4,7 +4,7 @@ date: 2021-12-13 10:00:55
 tags:
 - java
 - java学习
-categories: 技术学习  
+categories: 学习笔记  
 description: 在复习java啦，没想到东西还挺多的，本来是想一篇写完的，看来做不到emm
 ---
 
@@ -207,9 +207,28 @@ System.out.println(d2==f2);	//true
 
 System.out.println(d1+d2);	//0.8
 System.out.println(f1+f2);	//0.8
+// 精度丢失
 System.out.println(d1+f1);	//0.600000011920929
 System.out.println(d2+f2);	//1.0
 ```
+
+**如何解决精度丢失**  
+```java
+//import java.math.BigDecimal
+double doubleNum = 0.3d;
+float floatNum = 0.3f;
+//0.600000011920929 精度丢失
+System.out.println(doubleNum+floatNum);	
+		
+//解决精度的丢失
+BigDecimal b1 = new BigDecimal(Double.toString(doubleNum));
+BigDecimal b2 = new BigDecimal(Float.toString(floatNum));
+//0.6
+System.out.println(b1.add(b2));
+
+```
+
+BigDecimal经常用于解决精确计算问题。
 
 ## 运算符
 ### 运算符类型

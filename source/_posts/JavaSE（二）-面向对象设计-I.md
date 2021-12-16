@@ -4,7 +4,7 @@ date: 2021-12-14 21:53:19
 tags:
 - java
 - java学习
-categories: 技术学习  
+categories: 学习笔记
 description: 用blog记笔记可以随时拿出来复习emm，虽然感觉有什么重要的东西消失了
 ---
 ## 面向对象

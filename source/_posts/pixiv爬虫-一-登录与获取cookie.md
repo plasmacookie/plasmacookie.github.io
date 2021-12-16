@@ -2,7 +2,7 @@
 title: pixiv爬虫(一) 登录与获取cookie
 date: 2021-09-15 17:34:32
 categories:
-- 技术学习
+- 技术分享
 tags:
 - pixiv爬虫
 - 爬虫
