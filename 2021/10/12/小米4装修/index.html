@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/2021/10/12/%E5%B0%8F%E7%B1%B34%E8%A3%85%E4%BF%AE/s3.png">
 <meta property="og:image" content="http://example.com/2021/10/12/%E5%B0%8F%E7%B1%B34%E8%A3%85%E4%BF%AE/s4.png">
 <meta property="article:published_time" content="2021-10-12T09:23:18.000Z">
-<meta property="article:modified_time" content="2022-01-13T09:53:46.482Z">
+<meta property="article:modified_time" content="2022-01-15T02:13:02.892Z">
 <meta property="article:author" content="plasmacookie">
 <meta property="article:tag" content="小米4">
 <meta property="article:tag" content="HavocOS">
@@ -193,8 +193,8 @@
 
   <span class="post-updated">
     &nbsp; | &nbsp;   <i class="fas fa-history fa-fw post-meta-icon"></i> <span class="post-meta-item"><span class="post-meta-item-text">更新于</span></span>
-    <time itemprop="dateUpdated" datetime="2022-01-13T17:53:46+08:00" content="2022-01-13">
-      2022-01-13
+    <time itemprop="dateUpdated" datetime="2022-01-15T10:13:02+08:00" content="2022-01-15">
+      2022-01-15
     </time>
   </span>
 
@@ -205,7 +205,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-13 17:53:46" itemprop="dateModified" datetime="2022-01-13T17:53:46+08:00">2022-01-13</time>
+                <time title="修改时间：2022-01-15 10:13:02" itemprop="dateModified" datetime="2022-01-15T10:13:02+08:00">2022-01-15</time>
 
               </span>
             <span class="post-meta-item">
@@ -250,7 +250,7 @@
         <p><em><strong>记录贴，非教程</strong></em> </p>
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>&ensp;&ensp;&ensp;&ensp;国庆放假前在某鱼收了台小米4，本打算趁着假期玩一玩，结果收到货时假期已过了一半。确认收货后第二天手机电池就出了问题，因为电压不稳导致手机无法开机，并一直在MI-黑屏-MI间反复横跳。与店家沟通后对方表示必须要寄回去确认手机问题非用户导致后才能发新机子。好家伙，等新手机邮到估计就半个月后了，于是京东又花了几乎是这台手机一半的价钱买了块新电池(＠￣ー￣＠)。从换完电池到现在已经过了一周多，每天换不同的rom体验，乐趣还是很大的，于是来记录一下。  </p>
 <p>&ensp;&ensp;&ensp;&ensp;选择小米4的原因是因为它————便宜，作为备用机很够用的3+64配置只需要130块左右（虽然加上电池快两百了），火龙801在即将到来的冬天也能带来不少温暖（。另外最主要的原因是因为，这机子生态太好了。作为一代刷机小王子，它没有bl锁，并有着非常多的刷机包，国内定制rom的miui、flyme，类原生的exThmUI、crDroidAndroid、dotOS、PixelExperience，lineageOS等等等等，甚至还能刷windows phone和ubuntu touch。当然，缺点也是有的，801这颗32位处理器已经跟不上时代了，在已经到来的安卓12里，谷歌停止了对32位应用的支持，所以小米4不会有安卓12及之后的rom了。但现有rom的量之大仍然不影响它的可玩性。  </p>
-<p>&ensp;&ensp;&ensp;&ensp;这里选择使用浩劫仅仅是因为目前正在使用。记得先安装好驱动。  </p>
+<p>&ensp;&ensp;&ensp;&ensp;这里选择使用浩劫仅仅是因为目前正在使用。记得先在电脑上安装好小米4驱动。  </p>
 <h3 id="刷入HavocOS，twrp及magisk"><a href="#刷入HavocOS，twrp及magisk" class="headerlink" title="刷入HavocOS，twrp及magisk"></a>刷入HavocOS，twrp及magisk</h3><p>&ensp;&ensp;&ensp;&ensp;1、下载<a target="_blank" rel="noopener" href="https://t.me/cancrorom">HavocOS4.8</a>（tg频道下载，我没找到其他下载方式），<a target="_blank" rel="noopener" href="https://dl.twrp.me/cancro/">twrp</a>，<a target="_blank" rel="noopener" href="https://github.com/topjohnwu/Magisk/releases/tag/v23.0">magisk</a>，<a target="_blank" rel="noopener" href="https://androidfilehost.com/?fid=2188818919693781602">gapps</a>。<br>&ensp;&ensp;&ensp;&ensp;2、将这四个文件用数据线复制到手机储存中，电脑中保留twrp.img<br>&ensp;&ensp;&ensp;&ensp;3、电脑安装<a target="_blank" rel="noopener" href="https://developer.android.com/studio/command-line/adb">adb</a>，手机进入bootloader，并用数据线连接<br>&ensp;&ensp;&ensp;&ensp;4、电脑打开cmd并输入指令：<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>adb devices</code><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>fastboot flash boot twrp.img的绝对位置</code><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<code>fastboot reboot</code><br>&ensp;&ensp;&ensp;&ensp;5、手机会进入twrp界面<br>&ensp;&ensp;&ensp;&ensp;6、按如下步骤操作：<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;三清—-&gt;刷入rom包—-&gt;刷入magisk—-&gt;刷入gapps—-&gt;刷入twrp镜像—-&gt;重启到系统<br>&ensp;&ensp;&ensp;&ensp;<em>注：不需要谷歌框架的可以不刷入gapps</em><br>&ensp;&ensp;&ensp;&ensp;刷其他rom的只要将rom包换掉就好，操作流程都是一样的。  </p>
 <p>&ensp;&ensp;&ensp;&ensp;<strong>特别注意：</strong></p>
 <ul>
@@ -294,7 +294,10 @@
     <a href="/2021/09/09/%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95/" rel="prev" title="递归算法">
       <i class="fa fa-chevron-left"></i> 递归算法
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/21/pixiv%E7%88%AC%E8%99%AB/" rel="next" title="pixiv爬虫">
+      pixiv爬虫 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -369,7 +372,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -382,7 +385,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
