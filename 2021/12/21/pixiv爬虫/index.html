@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":230,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="用python写一个程序用来自动下载pixiv的图片">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pixiv爬虫">
+<meta property="og:url" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/index.html">
+<meta property="og:site_name" content="plasma">
+<meta property="og:description" content="用python写一个程序用来自动下载pixiv的图片">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/down01.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/down02.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/down03.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/down04.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/down05.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/down06.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/kind02.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/kind03.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/down07.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/down08.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/j1.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/j2.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/down09.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/u1.png">
+<meta property="og:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/u3.png">
+<meta property="article:published_time" content="2021-12-21T09:19:23.000Z">
+<meta property="article:modified_time" content="2022-01-15T04:15:06.478Z">
+<meta property="article:author" content="plasmacookie">
+<meta property="article:tag" content="爬虫">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="pixiv爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/down01.png">
+
+<link rel="canonical" href="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>pixiv爬虫 | plasma</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="stylesheet" href="https://npm.elemecdn.com/font-awesome/css/font-awesome.min.css"/ media="defer" onload="this.media='all'">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+<script defer src="/live2d-widget/autoload.js"></script>
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">plasma</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/21/pixiv%E7%88%AC%E8%99%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/85491458.jfif">
+      <meta itemprop="name" content="plasmacookie">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plasma">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pixiv爬虫
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-21 17:19:23" itemprop="dateCreated datePublished" datetime="2021-12-21T17:19:23+08:00">2021-12-21</time>
+	</span>
+
+
+
+  <span class="post-updated">
+    &nbsp; | &nbsp;   <i class="fas fa-history fa-fw post-meta-icon"></i> <span class="post-meta-item"><span class="post-meta-item-text">更新于</span></span>
+    <time itemprop="dateUpdated" datetime="2022-01-15T12:15:06+08:00" content="2022-01-15">
+      2022-01-15
+    </time>
+  </span>
+
+
+    <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-15 12:15:06" itemprop="dateModified" datetime="2022-01-15T12:15:06+08:00">2022-01-15</time>
+
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" itemprop="url" rel="index"><span itemprop="name">技术分享</span></a>
+                </span>
+            </span>
+
+<br>
+    
+    <i class="far fa-file-word fa-fw post-meta-icon"></i>
+<span class="post-meta-item"><span class="post-meta-item-text">本文字数：</span></span>
+<span> 2.5k</span>
+
+    <span class="post-meta-divider">|</span>
+     <i class="far fa-clock fa-fw post-meta-icon"></i>
+<span class="post-meta-item"><span class="post-meta-item-text">阅读时长 &asymp; </span></span>
+<span >10 分钟</span>
+   <span class="post-meta-divider">|</span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">用python写一个程序用来自动下载pixiv的图片</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&ensp;&ensp;&ensp;&ensp;虽然应该还有不少需要做的事，总之一件件做，但果然色图才是最重要的呀（，所以今天就要来爬取pixiv了。不出意外的话，这就是之前提到的重制版了，目的是写一个下载插画的爬虫。废话不多说，我们来开始吧(￣▽￣)~*  </p>
+<p><strong>功能要求</strong>:</p>
+<ol>
+<li>下载某画师的插画作品</li>
+<li>下载搜索到的插画作品</li>
+</ol>
+<h1 id="获取画师的插画作品"><a href="#获取画师的插画作品" class="headerlink" title="获取画师的插画作品"></a>获取画师的插画作品</h1><p>&ensp;&ensp;&ensp;&ensp;我们进入画师的主页，按F12进入浏览器的开发者工具，进入NetWork面板，分类选择XHR。按F5刷新后，会发现name中多了一个名叫<code>all?lang=zh</code>的get请求。点击查看Headers中的Request URL。  </p>
+<p><img src="down01.png"><br><img src="down02.png">  </p>
+<p>&ensp;&ensp;&ensp;&ensp;进入Request URL，通过仔细观察，我们不难发现，这是个保存着作者所有作品id的json对象。<code>illusts</code>后的json对象中保存着所有插画作品的id。<code>manga</code>后的json对象中保存着所有漫画作品的id。<code>novels</code>后的json对象中保存着所有小说作品的id。这样就得到画师的插画作品了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_illust_ids</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="comment"># 返回有作品id的集合</span></span><br><span class="line">    <span class="comment"># 获取json格式的字符串</span></span><br><span class="line">    h = HTMLDownloader.get_html(self.search_url)</span><br><span class="line">    <span class="comment"># 将json格式的字符串转换成字典格式</span></span><br><span class="line">    j = json.loads(h)</span><br><span class="line">    <span class="comment"># 获取包含插画id的字典</span></span><br><span class="line">    illusts = j[<span class="string">&#x27;body&#x27;</span>][<span class="string">&#x27;illusts&#x27;</span>]</span><br><span class="line">    illust_ids = <span class="built_in">set</span>()</span><br><span class="line">    <span class="comment"># 如果illusts不为空</span></span><br><span class="line">    <span class="keyword">if</span> illusts:</span><br><span class="line">        <span class="comment"># 循环illusts，并将作品id放入集合中</span></span><br><span class="line">        <span class="keyword">for</span> illust <span class="keyword">in</span> illusts:</span><br><span class="line">            illust_ids.add(illust)</span><br><span class="line">    <span class="keyword">return</span> illust_ids</span><br></pre></td></tr></table></figure>
+
+<h1 id="获取搜索的插画作品"><a href="#获取搜索的插画作品" class="headerlink" title="获取搜索的插画作品"></a>获取搜索的插画作品</h1><h2 id="第一页作品"><a href="#第一页作品" class="headerlink" title="第一页作品"></a>第一页作品</h2><p>&ensp;&ensp;&ensp;&ensp;我们搜索某内容并进入插画作品分类。按同样的方式打开控制台后刷新页面。发现name中多了一个get请求，点击并查看Headers中的Request URL。  </p>
+<p><img src="down03.png"><br><img src="down04.png">  </p>
+<p>&ensp;&ensp;&ensp;&ensp;打开Request URL，通过观察容易发现，这里保存着作品id。但我们在页面中查找”id”的时候却发现有78个，pixiv一个页面中保存着6x10一共60幅作品，这78个id里，肯定有不是作品id的我们不需要的id，如何分辨呢。通过仔细查看json数据，我发现数组”data”中，一共有60个json对象，正好和页面搜索结果一一对应。这些json对象的第一个key”id”的值，便是我们搜索得到的作品id。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_one_illust_ids</span>(<span class="params">self, p</span>):</span></span><br><span class="line">    <span class="comment"># 获取某一页作品的id集合</span></span><br><span class="line">    url = <span class="string">&#x27;https://www.pixiv.net/ajax/search/illustrations/&#x27;</span> + self.tag + <span class="string">&#x27;?mode=&#x27;</span> + self.mode + <span class="string">&#x27;&amp;p=&#x27;</span> + <span class="built_in">str</span>(p)</span><br><span class="line">    h = HTMLDownloader.get_html(url)</span><br><span class="line">    j = json.loads(h)</span><br><span class="line">    datas = j[<span class="string">&#x27;body&#x27;</span>][<span class="string">&#x27;illust&#x27;</span>][<span class="string">&#x27;data&#x27;</span>]</span><br><span class="line">    illust_ids = <span class="built_in">set</span>()</span><br><span class="line">    <span class="keyword">if</span> datas:</span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> datas:</span><br><span class="line">            illust_id = data[<span class="string">&#x27;id&#x27;</span>]</span><br><span class="line">            illust_ids.add(illust_id)</span><br><span class="line">    <span class="keyword">return</span> illust_ids</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取全部页数"><a href="#获取全部页数" class="headerlink" title="获取全部页数"></a>获取全部页数</h2><p>&ensp;&ensp;&ensp;&ensp;通过分析链接容易知道，param中的p即表示当前链接是搜索结果的第x页。只要让p=的数字递增，便可实现翻页效果，直到获取到所有作品id。那么又引出一个问题，什么时候到达最后一页呢？打开搜索后的界面，不难发现这个元素。  </p>
+<p><img src="down05.png"><br><img src="down06.png"></p>
+<p>&ensp;&ensp;&ensp;&ensp;这是搜索到的总的作品数，要知道pixiv每一页的数量都是固定的60幅，这样就能计算出总页数了。值得注意的是pixiv最多展示1000页，就算总作品数大于6w，也只能看到前1000页的作品。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_illust_count</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="comment"># 使用tag和mode构造出能够获取总作品数的链接</span></span><br><span class="line">    url = <span class="string">&#x27;https://www.pixiv.net/tags/&#x27;</span> + self.tag + <span class="string">&#x27;/illustrations?mode=&#x27;</span> + self.mode</span><br><span class="line">    <span class="comment"># 获取搜索的作品总数</span></span><br><span class="line">    h = HTMLDownloader.get_html(url)</span><br><span class="line">    p1 = re.<span class="built_in">compile</span>(<span class="string">&#x27;\\d*件投稿されています&#x27;</span>)</span><br><span class="line">    p2 = re.<span class="built_in">compile</span>(<span class="string">&#x27;\\d*&#x27;</span>)</span><br><span class="line">    <span class="comment"># 获取xx件投稿されています这句话</span></span><br><span class="line">    s = p1.search(h).group()</span><br><span class="line">    <span class="comment"># 从句子中获取数字</span></span><br><span class="line">    illust_count = <span class="built_in">int</span>(p2.search(s).group())</span><br><span class="line">    <span class="keyword">return</span> illust_count</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_total_page</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="comment"># 获取搜索内容的总页数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取作品总数</span></span><br><span class="line">    illust_count = self.get_illust_count()</span><br><span class="line">    <span class="comment"># 获得总页数</span></span><br><span class="line">    <span class="keyword">if</span> illust_count/<span class="number">60</span> &gt; <span class="number">1000</span>:</span><br><span class="line">        total_page = <span class="number">1000</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        total_page = <span class="built_in">int</span>(math.ceil(illust_count/<span class="number">60</span>))</span><br><span class="line">    <span class="keyword">return</span> total_page</span><br></pre></td></tr></table></figure>
+
+<h2 id="作品限制级"><a href="#作品限制级" class="headerlink" title="作品限制级"></a>作品限制级</h2><p>当我们在用户设置里选择显示R18与R18G作品时，便可以显示R18与R18G的作品。  </p>
+<p><img src="kind02.png"><br><img src="kind03.png">  </p>
+<p>&ensp;&ensp;&ensp;&ensp;在用户设置–&gt;浏览限制中选择显示作品后，再次搜索。会发现页面上多出了限制级分类。网页链接多出了<code>?mode=safe</code>，这便是和限制级有关的部分了。当mode=safe时，显示全年龄。当mode=r18时，显示R18以及R18G作品。当没有这部分或者mode=all时，全年龄和限制级作品全都显示。  </p>
+<p>&ensp;&ensp;&ensp;&ensp;值得注意的是，若不选择显示限制级作品，就算手动修改链接为mode=r18也是不会显示限制级作品的。  </p>
+<p>&ensp;&ensp;&ensp;&ensp;另外，画师作品也是区分限制级的，当在用户设置中关掉显示r18与r18g作品时，查看画师作品时只显示全年龄作品，否则全部显示。这只和用户设置有关。</p>
+<h1 id="下载作品"><a href="#下载作品" class="headerlink" title="下载作品"></a>下载作品</h1><h2 id="判断是否下载作品"><a href="#判断是否下载作品" class="headerlink" title="判断是否下载作品"></a>判断是否下载作品</h2><p>&ensp;&ensp;&ensp;&ensp;有了作品id后，我们需要判断是否要下载该作品。pixiv判断一个作品的受欢迎程度是根据三种数值来判断的，分别是点赞数，收藏数和浏览量。使用哪一个都没关系，甚至采用某种算法对这三个数值进行计算后得到的数值都可以。毕竟我是自己用的，就不搞那么复杂了，我就用收藏数来作为判断某作品是否是我想要下载的依据。  </p>
+<p>&ensp;&ensp;&ensp;&ensp;有了作品id后，我们可以拼接字符串，来获得作品的地址。我们打开一幅作品，进行分析。  </p>
+<p><img src="down07.png"><br><img src="down08.png"></p>
+<p>&ensp;&ensp;&ensp;&ensp;发现我们需要的属性都在页面上。源码中，使用bookmarkCount表示收藏数，likeCount表示点赞数，viewCount表示浏览量。我们还发现pageCount这个属性，这是表示该作品一共有多少页的属性。  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_resource</span>(<span class="params">self, <span class="built_in">id</span></span>):</span></span><br><span class="line">    <span class="comment"># 获取是否是动图、收藏数、总页数和原图</span></span><br><span class="line">    <span class="comment"># 通过作品id获取页面源码</span></span><br><span class="line">    h = self.get_html(<span class="built_in">id</span>)</span><br><span class="line">    <span class="comment"># 使用BeautifulSoup获取页面元素</span></span><br><span class="line">    soup = BeautifulSoup(h, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line">    metas = soup.find_all(<span class="string">&#x27;meta&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> meta <span class="keyword">in</span> metas:</span><br><span class="line">        <span class="keyword">if</span> meta.get(<span class="string">&#x27;name&#x27;</span>) == <span class="string">&#x27;preload-data&#x27;</span>:</span><br><span class="line">            s = meta.get(<span class="string">&#x27;content&#x27;</span>)</span><br><span class="line">    j = json.loads(s)</span><br><span class="line">    data = j[<span class="string">&#x27;illust&#x27;</span>][<span class="built_in">str</span>(<span class="built_in">id</span>)]</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">id</span>, self.is_ugoira(h), data[<span class="string">&#x27;bookmarkCount&#x27;</span>], data[<span class="string">&#x27;pageCount&#x27;</span>], data[<span class="string">&#x27;urls&#x27;</span>][<span class="string">&#x27;original&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="判断作品是静图还是动图"><a href="#判断作品是静图还是动图" class="headerlink" title="判断作品是静图还是动图"></a>判断作品是静图还是动图</h2><p>&ensp;&ensp;&ensp;&ensp;pixiv的静图与动图的下载方式不同，所以区分它们是很有必要的。我们打开一幅动图作品分析其源码，试着找到它与静图作品的不同之处。经过我不懈努力，终于发现个是在所有动图页面中都存在，而不存在于静图页面的单词。这里直接说结论:<strong>ugoira</strong>。（写爬虫可真费眼睛）  </p>
+<p><img src="j1.png"><br><img src="j2.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_ugoira</span>(<span class="params">self, h</span>):</span></span><br><span class="line">    <span class="comment"># 判断是否是动图，是返回True，否则返回False</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;ugoira&#x27;</span> <span class="keyword">in</span> h:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="下载静图"><a href="#下载静图" class="headerlink" title="下载静图"></a>下载静图</h2><p>&ensp;&ensp;&ensp;&ensp;页面代码中key”urls”的值即是静态图的二进制文件。甚至还贴心的可以让我们选择像素，有mini、thumb、small、regular、original五种可以选择。既然要下载肯定要下原图啦。需要注意的是，二进制文件均是是以p0结尾的。对于有多张图片的作品，只要递增p后的数值就可以了。我们之前获得的pageCount属性在这里就发挥用处了。但当我们直接打开这些图片链接的时候，发现403了。经过谷歌大神的解答，我了解到这是pixiv的防盗链机制，如果返回头referer不带作品链接就会报430。那这个问题就等写代码的时候再解决吧。</p>
+<p><img src="down09.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_original_list</span>(<span class="params">self, resource</span>):</span></span><br><span class="line">    <span class="comment"># 根据作品页数与原图链接构造原图列表</span></span><br><span class="line">    original_p0 = resource[<span class="number">4</span>]</span><br><span class="line">    pages = resource[<span class="number">3</span>]</span><br><span class="line">    li = original_p0.split(<span class="string">&#x27;0.&#x27;</span>)</span><br><span class="line">    original_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(pages):</span><br><span class="line">        original = li[<span class="number">0</span>]+<span class="built_in">str</span>(i)+<span class="string">&#x27;.&#x27;</span>+li[<span class="number">1</span>]</span><br><span class="line">        original_list.append(original)</span><br><span class="line">    <span class="keyword">return</span> original_list</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">static_download</span>(<span class="params">self, resource, file_path</span>):</span></span><br><span class="line">    <span class="comment"># 下载静图</span></span><br><span class="line">    <span class="comment"># 获取静态图的原图列表</span></span><br><span class="line">    original_list = self.get_original_list(resource)</span><br><span class="line">    <span class="comment"># 遍历列表，下载列表中每个链接</span></span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> original_list:</span><br><span class="line">        self.download_file(resource[<span class="number">0</span>], url, file_path)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="下载动态图"><a href="#下载动态图" class="headerlink" title="下载动态图"></a>下载动态图</h2><p>&ensp;&ensp;&ensp;&ensp;我们打开一幅动图作品，按之前的方式打开控制台并刷新。发现name中多了一个名为ugoira_meta?lang=zh的get请求。点击查看Header中的Request URL，发现该链接保存着动图的压缩包链接和所有文件名以及每个文件的帧延迟时间。有了每一帧和每一帧的延迟时间，我们就可以合成gif了。    </p>
+<p><img src="u1.png"><br><img src="u3.png">  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ugoira_download</span>(<span class="params">self, resource, file_path</span>):</span></span><br><span class="line">    <span class="comment"># 下载动图</span></span><br><span class="line">    <span class="comment"># 获取动图压缩包和延迟时间</span></span><br><span class="line">    illust_id = resource[<span class="number">0</span>]</span><br><span class="line">    h = HTMLParser()</span><br><span class="line">    t = h.get_ugoira_resource(illust_id)</span><br><span class="line">    zip_file = t[<span class="number">0</span>]</span><br><span class="line">    delays = t[<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 将压缩包下载到本地，获取压缩包名称</span></span><br><span class="line">    file_name = self.download_file(illust_id, zip_file, file_path)</span><br><span class="line">    <span class="comment"># 解压压缩包，获取解压后的文件列表</span></span><br><span class="line">    file_list = self.open_zip(file_path, file_name, illust_id)</span><br><span class="line">    <span class="comment"># 合成gif</span></span><br><span class="line">    self.create_gif(file_list, delays, file_path, illust_id)</span><br><span class="line">    <span class="comment"># 删除中间文件和文件夹</span></span><br><span class="line">    <span class="keyword">for</span> img <span class="keyword">in</span> file_list:</span><br><span class="line">        os.remove(img)</span><br><span class="line">    os.remove(file_path+file_name)</span><br><span class="line">    os.removedirs(file_path+illust_id)</span><br></pre></td></tr></table></figure>
+
+<h1 id="需解析的URL汇总"><a href="#需解析的URL汇总" class="headerlink" title="需解析的URL汇总"></a>需解析的URL汇总</h1><p><code>https://www.pixiv.net/ajax/user/ +用户id+ /profile/all?lang=zh</code>:<br>通过该URL可获取该用户的所有作品的id。  </p>
+<p><code>https://www.pixiv.net/ajax/search/illustrations/ +搜索内容+ ?mode= +限制级分类+ &amp;p= +页数</code>:<br>通过该url可获取某搜索内容下，某限制级分类的某页所有作品的id。  </p>
+<p><code>https://www.pixiv.net/tags/ +搜索内容+ /illustrations?mode= +限制级分类</code>:<br>通过该url可获取某搜索内容下，某限制级分类的作品总数。  </p>
+<p><code>https://www.pixiv.net/artworks/ + 作品id</code>:<br>通过该url可获取某作品的收藏数，页数，是静图还是动图。还可以从该页面获取原图链接。</p>
+<p><code>https://www.pixiv.net/ajax/illust/ +动图作品id+ /ugoira_meta?lang=zh</code>:<br>通过该url可获取动图作品的压缩包和每一帧的延迟时间。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>&ensp;&ensp;&ensp;&ensp;项目代码已上传至github，请至此处查看: <a target="_blank" rel="noopener" href="https://github.com/plasmacookie/pixivSpider">pixivSpider</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/pixiv%E7%88%AC%E8%99%AB/" rel="tag"># pixiv爬虫</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/12/%E5%B0%8F%E7%B1%B34%E8%A3%85%E4%BF%AE/" rel="prev" title="小米4装修">
+      <i class="fa fa-chevron-left"></i> 小米4装修
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/13/%E4%B8%80%E5%8A%A07pro%E6%B0%A7OS10%E8%9D%B0%E8%9B%87%E6%9D%9C%E6%AF%94%E5%85%B1%E5%AD%98/" rel="next" title="一加7pro氧OS10蝰蛇杜比共存">
+      一加7pro氧OS10蝰蛇杜比共存 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%94%BB%E5%B8%88%E7%9A%84%E6%8F%92%E7%94%BB%E4%BD%9C%E5%93%81"><span class="nav-number">2.</span> <span class="nav-text">获取画师的插画作品</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%90%9C%E7%B4%A2%E7%9A%84%E6%8F%92%E7%94%BB%E4%BD%9C%E5%93%81"><span class="nav-number">3.</span> <span class="nav-text">获取搜索的插画作品</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%A1%B5%E4%BD%9C%E5%93%81"><span class="nav-number">3.1.</span> <span class="nav-text">第一页作品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%A8%E9%83%A8%E9%A1%B5%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">获取全部页数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E5%93%81%E9%99%90%E5%88%B6%E7%BA%A7"><span class="nav-number">3.3.</span> <span class="nav-text">作品限制级</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BD%9C%E5%93%81"><span class="nav-number">4.</span> <span class="nav-text">下载作品</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%8B%E8%BD%BD%E4%BD%9C%E5%93%81"><span class="nav-number">4.1.</span> <span class="nav-text">判断是否下载作品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E4%BD%9C%E5%93%81%E6%98%AF%E9%9D%99%E5%9B%BE%E8%BF%98%E6%98%AF%E5%8A%A8%E5%9B%BE"><span class="nav-number">4.2.</span> <span class="nav-text">判断作品是静图还是动图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E9%9D%99%E5%9B%BE"><span class="nav-number">4.3.</span> <span class="nav-text">下载静图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%8A%A8%E6%80%81%E5%9B%BE"><span class="nav-number">4.4.</span> <span class="nav-text">下载动态图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9C%80%E8%A7%A3%E6%9E%90%E7%9A%84URL%E6%B1%87%E6%80%BB"><span class="nav-number">5.</span> <span class="nav-text">需解析的URL汇总</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">代码</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plasmacookie"
+      src="/images/85491458.jfif">
+  <p class="site-author-name" itemprop="name">plasmacookie</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plasmacookie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+<!--动态线条背景-->
+<script type="text/javascript"
+color="100,100,100" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
