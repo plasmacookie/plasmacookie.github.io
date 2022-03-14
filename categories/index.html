@@ -198,7 +198,7 @@
 
           </div>
           
-
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -380,11 +380,29 @@
 
 
 
-
-
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'b0715df9370523a18ee6',
+      clientSecret: 'ee8b5a67399a4d78f69073aa9abaa5ae67e2dab0',
+      repo        : 'plasmacookie.github.io',
+      owner       : 'plasmacookie',
+      admin       : ['plasmacookie'],
+      id          : 'a676607444a8bc8b150c9a3aff884e61',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
