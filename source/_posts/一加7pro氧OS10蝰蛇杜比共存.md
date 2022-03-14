@@ -17,7 +17,7 @@ description: 刷音效模块那些事。
 # 蝰蛇音效
 &ensp;&ensp;&ensp;&ensp;首先刷入[Audio-Modification-Library](https://zackptg5.com/downloads/Audio-Modification-Library_v4.1.zip)，并重启，该模块可以使多个音效模块共存。  
 
-&ensp;&ensp;&ensp;&ensp;蝰蛇音效需要将SeLinux切到宽容模式才能正常工作，因此先来着手这方面工作。下载并安装[Scene4](https://github.com/helloklf/vtools/releases),在杂项设置中打开SeLinux宽容模式。  
+&ensp;&ensp;&ensp;&ensp;蝰蛇音效需要将SeLinux切到宽容模式才能正常工作，因此先来着手这方面工作。下载并安装[Scene4](https://github.com/helloklf/vtools/releases)，在杂项设置中打开SeLinux宽容模式。  
 ![](SeLinux宽容.png)  
 
 &ensp;&ensp;&ensp;&ensp;之后刷入[蝰蛇音效的magisk模块](https://zackptg5.com/downloads/v4afx_v2.7.2.1.zip)，过程中会自动安装一个名为`ViPER4Android FX`的应用。打开该应用，授予root权限，之后会提示下载驱动，安装好驱动后会自动重启。  
