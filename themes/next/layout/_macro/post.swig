@@ -65,15 +65,6 @@
                
           {%- endif %}
 
-{%if post.updated and post.updated > post.date%}
-
-  <span class="post-updated">
-    &nbsp; | &nbsp;   <i class="fas fa-history fa-fw post-meta-icon"></i> <span class="post-meta-item"><span class="post-meta-item-text">更新于</span></span>
-    <time itemprop="dateUpdated" datetime="{{ moment(post.updated).format() }}" content="{{ date(post.updated, config.date_format) }}">
-      {{ date(post.updated, config.date_format) }}
-    </time>
-  </span>
-{% endif %}
 
     <span class="post-meta-divider">|</span>
 
