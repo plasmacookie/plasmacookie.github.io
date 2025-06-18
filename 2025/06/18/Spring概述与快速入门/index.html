@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="4a985e8a9af778ac">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"plasmacookie.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":230,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="记录学习[黑马程序员新版Spring零基础入门到精通，一套搞定spring全套视频教程（含实战源码）](https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1rt4y1u7q5)的学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring概述与快速入门">
+<meta property="og:url" content="https://plasmacookie.github.io/2025/06/18/Spring%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="plasma">
+<meta property="og:description" content="记录学习[黑马程序员新版Spring零基础入门到精通，一套搞定spring全套视频教程（含实战源码）](https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1rt4y1u7q5)的学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://plasmacookie.github.io/2025/06/18/Spring%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/Spring%20Framework%20技术栈图.jpeg">
+<meta property="og:image" content="https://plasmacookie.github.io/2025/06/18/Spring%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/UserService内有UserDao.png">
+<meta property="article:published_time" content="2025-06-18T04:39:13.000Z">
+<meta property="article:modified_time" content="2025-06-18T05:57:02.721Z">
+<meta property="article:author" content="plasmacookie">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="软件开发">
+<meta property="article:tag" content="黑马程序员">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plasmacookie.github.io/2025/06/18/Spring%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/Spring%20Framework%20技术栈图.jpeg">
+
+<link rel="canonical" href="https://plasmacookie.github.io/2025/06/18/Spring%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Spring概述与快速入门 | plasma</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="stylesheet" href="https://npm.elemecdn.com/font-awesome/css/font-awesome.min.css"/ media="defer" onload="this.media='all'">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">plasma</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plasmacookie.github.io/2025/06/18/Spring%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/85491458.jfif">
+      <meta itemprop="name" content="plasmacookie">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plasma">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring概述与快速入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-06-18 12:39:13 / 修改时间：13:57:02" itemprop="dateCreated datePublished" datetime="2025-06-18T12:39:13+08:00">2025-06-18</time>
+	</span>
+
+
+    <span class="post-meta-divider">|</span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/%E9%BB%91%E9%A9%AC-%E9%83%9D%E8%80%81%E5%B8%88-Spring%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" itemprop="url" rel="index"><span itemprop="name">黑马-郝老师-Spring零基础入门到精通</span></a>
+                </span>
+            </span>
+
+<br>
+    
+    <i class="far fa-file-word fa-fw post-meta-icon"></i>
+<span class="post-meta-item"><span class="post-meta-item-text">本文字数：</span></span>
+<span> 3.4k</span>
+
+    <span class="post-meta-divider">|</span>
+     <i class="far fa-clock fa-fw post-meta-icon"></i>
+<span class="post-meta-item"><span class="post-meta-item-text">阅读时长 &asymp; </span></span>
+<span >14 分钟</span>
+   <span class="post-meta-divider">|</span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description"><p>记录学习<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1rt4y1u7q5">黑马程序员新版Spring零基础入门到精通，一套搞定spring全套视频教程（含实战源码）</a>的学习笔记</p>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="传统Java-Web开发困惑及解决方案"><a href="#传统Java-Web开发困惑及解决方案" class="headerlink" title="传统Java Web开发困惑及解决方案"></a>传统Java Web开发困惑及解决方案</h2><h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><p>先来看一段Java Web代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户账户信息修改业务方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateUserInfo</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">// 开启事务</span></span><br><span class="line">        DaoUtils.openTransaction();</span><br><span class="line">        <span class="comment">// 获得UserDao执行修改User数据到数据库操作</span></span><br><span class="line">        UserDao userDao = <span class="keyword">new</span> UserDaoImpl();</span><br><span class="line">        userDao.updateUserInfo(user);</span><br><span class="line">        <span class="comment">// 修改成功后，向用户行为日志表中插入一条数据。包括内容，操作时间，用户，修改行为等信息。</span></span><br><span class="line">        UserLog userLog = <span class="keyword">new</span> UserLogImpl();</span><br><span class="line">        userLog.recodeUserUpdate(user);</span><br><span class="line">        <span class="comment">// 提交事务</span></span><br><span class="line">        DaoUtils.commit();</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        <span class="comment">// 回滚事务</span></span><br><span class="line">        DaoUtils.rollback();</span><br><span class="line">        <span class="comment">// 向异常日志表插入数据</span></span><br><span class="line">        ExceptionLog exceptionLog = <span class="keyword">new</span> ExceptionLogImpl();</span><br><span class="line">        exceptionLog.recodeException(<span class="keyword">this</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用户注册业务方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">regist</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="comment">// 开启事务</span></span><br><span class="line">        DaoUtils.openTransaction();</span><br><span class="line">        <span class="comment">// 获得UserDao执行添加User数据到数据库操作</span></span><br><span class="line">        UserDao userDao = <span class="keyword">new</span> UserDaoImpl();</span><br><span class="line">        userDao.addUser(user);</span><br><span class="line">        <span class="comment">// 注册成功后，向用户行为日志表中插入一条数据。包括内容，操作时间, 用户，注册行为等信息。</span></span><br><span class="line">        UserLog userLog = <span class="keyword">new</span> UserLogImpl();</span><br><span class="line">        userLog.recodeUserRegist(user);</span><br><span class="line">        <span class="comment">//注册成功后，向用户邮箱发送一封激活邮件</span></span><br><span class="line">        CommonUtils.sendEmail(user);</span><br><span class="line">        <span class="comment">// 提交事务</span></span><br><span class="line">        DaoUtils.commit();</span><br><span class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">        <span class="comment">// 回滚事务</span></span><br><span class="line">        DaoUtils.rollback();</span><br><span class="line">        <span class="comment">// 向异常日志表插入数据</span></span><br><span class="line">        ExceptionLog exceptionLog = <span class="keyword">new</span> ExceptionLogImpl();</span><br><span class="line">        exceptionLog.recodeException(<span class="keyword">this</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两个方法中，主要的业务无非是以下代码，都是获得DAO后再去执行方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获得UserDao执行修改User数据到数据库操作</span></span><br><span class="line">UserDao userDao = <span class="keyword">new</span> UserDaoImpl();</span><br><span class="line">userDao.updateUserInfo(user);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获得UserDao执行添加User数据到数据库操作</span></span><br><span class="line">UserDao userDao = <span class="keyword">new</span> UserDaoImpl();</span><br><span class="line">userDao.addUser(user);</span><br></pre></td></tr></table></figure>
+
+<p>而除了主业务代码外，还包括事务与日志记录等  </p>
+<p>事务相关操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开启事务</span></span><br><span class="line">DaoUtils.openTransaction();</span><br><span class="line"><span class="comment">// 提交事务</span></span><br><span class="line">DaoUtils.commit();</span><br><span class="line"><span class="comment">// 回滚事务</span></span><br><span class="line">DaoUtils.rollback();</span><br></pre></td></tr></table></figure>
+
+<p>日志相关操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改成功后，向用户行为日志表中插入一条数据。包括内容，操作时间，用户，修改行为等信息。</span></span><br><span class="line">UserLog userLog = <span class="keyword">new</span> UserLogImpl();</span><br><span class="line">userLog.recodeUserUpdate(user);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册成功后，向用户行为日志表中插入一条数据。包括内容，操作时间, 用户，注册行为等信息。</span></span><br><span class="line">UserLog userLog = <span class="keyword">new</span> UserLogImpl();</span><br><span class="line">userLog.recodeUserRegist(user);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向异常日志表插入数据</span></span><br><span class="line">ExceptionLog exceptionLog = <span class="keyword">new</span> ExceptionLogImpl();</span><br><span class="line">exceptionLog.recodeException(<span class="keyword">this</span>, e);</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码示例中出现的问题"><a href="#代码示例中出现的问题" class="headerlink" title="代码示例中出现的问题"></a>代码示例中出现的问题</h3><p><strong>问题一：层与层之间紧密耦合；接口与接口之间紧密耦合</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UserDao userDao = <span class="keyword">new</span> UserDaoImpl();</span><br><span class="line">UserLog userLog = <span class="keyword">new</span> UserLogImpl();</span><br><span class="line">ExceptionLog exceptionLog = <span class="keyword">new</span> ExceptionLogImpl();</span><br></pre></td></tr></table></figure>
+<p>这几行代码作用都是在业务层获取DAO层的操作对象，于是new了这三个对象，拿到对象之后再去调用对应的方法进行操作。但是这样写耦合度会很高。层与层之间耦合度很紧密，接口与具体实现之间耦合度也很紧密。</p>
+<p><em><strong>解决思路</strong></em><br>程序代码中不要手动new对象，而是要用第三方根据要求为程序提供需要的bean对象。  </p>
+<p><strong>比如：</strong> 工厂设计模式</p>
+<pre class="mermaid">graph LR
+    A(程序代码) --> B[第三方]
+    B --> C(Bean对象)</pre>
+
+<p><strong>问题二：通用的事务功能与日志功能都耦合在业务代码中</strong><br>不难发现，两个方法中事务功能和日志功能几乎是相同的。事实上，几乎所有的业务层方法都需要这些事务功能和日志功能。</p>
+<p><em><strong>解决思路</strong></em><br>程序代码中不要手动new对象，而是要用第三方根据要求为程序提供需要的bean对象的proxy对象。 </p>
+<p><strong>比如：</strong> proxy设计模式。示例中的这两个方法都是业务层的方法（假设为UserService），在获取UserService对象的时候也不手动new，而是通过第三方帮忙提供，但是第三方提供的是一个通过proxy设计模式被增强过的UserService对象，它内部的方法也是被增强过的方法，它内部的方法  具备事务跟日志的功能。</p>
+<pre class="mermaid">graph LR
+    A(程序代码) --> B[第三方]
+    B --> C(BeanProxy对象)</pre>
+
+<h2 id="IoC、DI、AOP概要"><a href="#IoC、DI、AOP概要" class="headerlink" title="IoC、DI、AOP概要"></a>IoC、DI、AOP概要</h2><pre class="mermaid">graph LR
+    A(程序代码) --> B[第三方]
+    B --> C(Bean对象)
+    B --> D(BeanProxy对象)</pre>
+<p>为了解决传统Java Web程序代码在获取bean时，不直接new，而是去找第三方，有些bean，我们就要bean对象，有些需要拓展的bean，我们要bean的proxy对象。</p>
+<h3 id="IoC思想"><a href="#IoC思想" class="headerlink" title="IoC思想"></a>IoC思想</h3><p>Inversion of Control，控制反转。强调的是把在程序中创建bean的权利反转给第三方。</p>
+<h3 id="DI思想"><a href="#DI思想" class="headerlink" title="DI思想"></a>DI思想</h3><p>Dependency Injection，依赖注入。强调的是把Bean之间关系的设置交给第三方。  </p>
+<p><strong>比如：</strong> 有Bean1和bean2两个bean，bean1中有bean2这个属性，正常需要通过第三方先创建bean1，再创建bean2，然后手动把bean2设置给bean1。但通过依赖注入，这种关系通过第三方设置，创建bean1的时候，不需要手动创建bean2，第三方会自动创建bean2并且把bean2设置给bean1。</p>
+<h3 id="AOP思想"><a href="#AOP思想" class="headerlink" title="AOP思想"></a>AOP思想</h3><p>Aspect Oriented Programming，面向切面编程。功能的横向抽取，主要的实现方式就是Proxy。</p>
+<h2 id="Spring-Framework技术栈图"><a href="#Spring-Framework技术栈图" class="headerlink" title="Spring Framework技术栈图"></a>Spring Framework技术栈图</h2><img src="Spring Framework 技术栈图.jpeg" width="500px">  
+
+<ol>
+<li>Test：单元测试与集成测试</li>
+<li>Core Container：核心容器，提供了Spring的基本功能，是其他模块建立的基础<ol>
+<li>Beans模块：提供了BeansFactory，是工厂模式实现的经典，Spring将对象管理为Bean</li>
+<li>Core核心模块：提供了Spring框架的基本组成部分，包括IoC和DI</li>
+<li>Context上下文模块：构建于核心模块之上，它是访问定义配置的任何对象的媒介，拓展了BeansFactory的功能。其中ApplicationContext是Context模块的核心接口</li>
+<li>SpEL模块：是Spring3.0之后新增的模块，提供了Spring Expression Language支持，是运行时查询和操作对象图的强大的表达式语言。</li>
+</ol>
+</li>
+<li>AOP模块：提供了面向切面编程的支持，允许定义方法拦截器和切入点，将代码按照功能进行分离，以降低耦合度</li>
+<li>Aspects模块：AOP模块的拓展，通过集成AspectJ提供了更加强大的AOP功能</li>
+<li>Instrumentation模块：主要用于提供类加载器增强和字节码操作支持</li>
+<li>Messaging模块：是Spring4.0之后新增的模块，提供了对消息传递体系结构和协议的支持</li>
+<li>Data Access/Integration：数据访问/集成层<ol>
+<li>JDBC模块：提供了一个JDBC的抽象层，大幅度地减少了在开发中对于数据库的操作代码</li>
+<li>ORM模块：用于简化JPA（Java Persistence API）、Hibernate、JDO（Java Data Objects）和其他ORM工具与Spring框架集成的模块</li>
+<li>OXM模块：提供了一个抽象层，用于支持各种对象/XML映射实现，如JAXB、Castor、XMLBeans、JiBX和XStream</li>
+<li>JMS模块：是为了简化在 Spring 应用中使用消息传递服务而设计的模块。 它提供了对 JMS（Java Message Service）规范的支持，使得开发者能够方便地发送和接收消息，与消息代理（如 ActiveMQ、RabbitMQ 等）进行交互。</li>
+<li>Transactions事务管理模块：针对JDBC API中关于事务管理这一部分进行了高级抽象，它支持两种方式的事务管理，分别是：声明式事务管理 (Declarative Transaction Management) 与 编程式事务管理 (Programmatic Transaction Management) 。</li>
+</ol>
+</li>
+<li>Web层<ol>
+<li>web模块：提供了核心的Web相关功能的集成，比如IoC容器的初始化、Web应用上下文（context）的初始化、多部（multipart）文件上传功能、HTTP客户端、Servlet 过滤器、远程调用、用于集成其它 web 框架及技术（如Hessian，Burlap）的基础结构。</li>
+<li>WebSocket模块：提供了对WebSocket的支持</li>
+<li>Servlet模块：也称作spring-webmvc，是 Spring MVC 和 REST 的实现</li>
+<li>Portlet 模块，它提供用于portlet环境的 MVC 实现，并具有与 spring-webmvc 模块相同的功能。</li>
+</ol>
+</li>
+</ol>
+<h2 id="BeanFactory快速入门"><a href="#BeanFactory快速入门" class="headerlink" title="BeanFactory快速入门"></a>BeanFactory快速入门</h2><p>BeanFactory的具体实现类是DefaultListableBeanFactory</p>
+<h3 id="BeanFactory的运行逻辑"><a href="#BeanFactory的运行逻辑" class="headerlink" title="BeanFactory的运行逻辑"></a>BeanFactory的运行逻辑</h3><pre class="mermaid">graph LR
+    A(程序代码) --> B(第三方)
+    B --> C(配置清单)
+    C --> D((Bean对象))
+    C --> E((Bean对象))</pre>
+
+<p><strong>IoC思想的实现步骤</strong>  </p>
+<ol>
+<li>导入Spring的jar包或者Maven坐标</li>
+<li>定义接口及实现类</li>
+<li>创建xml配置文件，将实现类的信息配置到该xml文件中</li>
+<li>编写测试代码，创建BeanFactory，加载配置文件，获取接口实例对象</li>
+</ol>
+<p><strong>DI思想的实现步骤</strong>  </p>
+<ol start="5">
+<li>定义新的接口与实现类</li>
+<li>修改原有实现类代码，添加一个setter方法用于接受注入的对象</li>
+<li>将新的实现类的信息配置到xml文件中</li>
+<li>在原来的<code>&lt;bean&gt;</code>标签中嵌入<code>&lt;property&gt;</code>标签配置注入</li>
+</ol>
+<h3 id="代码实例1-IoC思想简单实现"><a href="#代码实例1-IoC思想简单实现" class="headerlink" title="代码实例1 IoC思想简单实现"></a>代码实例1 IoC思想简单实现</h3><p><strong>项目文件结构</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">spring-ioc-test01/</span><br><span class="line">├── src/</span><br><span class="line">│    └── main/</span><br><span class="line">│         ├── java/</span><br><span class="line">|         |     └── com/plasmacookie/</span><br><span class="line">|         |                  ├── service/</span><br><span class="line">|         |                  |      ├── impl/</span><br><span class="line">|         |                  |      |     └── UserServiceImpl.java</span><br><span class="line">|         |                  |      └── UserService.java</span><br><span class="line">|         |                  └── test/</span><br><span class="line">|         |                         └── BeanFactoryTest.java</span><br><span class="line">|         └── resources/</span><br><span class="line">|               └── beans.xml</span><br><span class="line">└── pom.xml</span><br></pre></td></tr></table></figure>
+
+<p><strong>在Maven配置文件中导入spring-context包的坐标-pom.xml</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.plasmacookie<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-ioc-test01<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.39<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>新建业务层接口-UserService.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.plasmacookie.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>新建业务层接口的实现类-UserServiceImpl.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.plasmacookie.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.plasmacookie.service.UserService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在beans配置文件中配置该实现类的信息-beans.xml</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 在这里配置您的bean --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.plasmacookie.service.impl.UserServiceImpl&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>编写测试代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.plasmacookie.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.support.DefaultListableBeanFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.xml.XmlBeanDefinitionReader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanFactoryTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建工厂对象</span></span><br><span class="line">        DefaultListableBeanFactory beanFactory = <span class="keyword">new</span> DefaultListableBeanFactory();</span><br><span class="line">        <span class="comment">// 为工厂创建读取器</span></span><br><span class="line">        XmlBeanDefinitionReader reader = <span class="keyword">new</span> XmlBeanDefinitionReader(beanFactory);</span><br><span class="line">        <span class="comment">// 读取beans.xml文件</span></span><br><span class="line">        reader.loadBeanDefinitions(<span class="string">&quot;beans.xml&quot;</span>);</span><br><span class="line">        <span class="comment">// 使用工厂对象获取需要的bean, 传参为在beans.xml配置的bean的id</span></span><br><span class="line">        Object userService = beanFactory.getBean(<span class="string">&quot;userService&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(userService);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行代码</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.plasmacookie.service.impl.UserServiceImpl@546a03af</span><br></pre></td></tr></table></figure>
+
+<p>可以看到控制台打印出了userService的地址，说明获取bean成功。</p>
+<h3 id="代码实例2-DI思想简单实现"><a href="#代码实例2-DI思想简单实现" class="headerlink" title="代码实例2 DI思想简单实现"></a>代码实例2 DI思想简单实现</h3><p><strong>项目文件结构</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">spring-ioc-test01/</span><br><span class="line">├── src/</span><br><span class="line">│    └── main/</span><br><span class="line">│         ├── java/</span><br><span class="line">|         |     └── com/plasmacookie/</span><br><span class="line">|         |                  ├── dao/</span><br><span class="line">|         |                  |    ├── impl/</span><br><span class="line">|         |                  |    |     └── UserDaoImpl.java</span><br><span class="line">|         |                  |    └── UserDao.java</span><br><span class="line">|         |                  ├── service/</span><br><span class="line">|         |                  |    ├── impl/</span><br><span class="line">|         |                  |    |     └── UserServiceImpl.java</span><br><span class="line">|         |                  |    └── UserService.java</span><br><span class="line">|         |                  └── test/</span><br><span class="line">|         |                       └── BeanFactoryTest.java</span><br><span class="line">|         └── resources/</span><br><span class="line">|               └── beans.xml</span><br><span class="line">└── pom.xml</span><br></pre></td></tr></table></figure>
+
+<p><strong>新建数据访问层接口-UserDao.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.plasmacookie.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>新建数据访问层接口的实现类-UserDaoImpl.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.plasmacookie.dao.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.plasmacookie.dao.UserDao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoImpl</span> <span class="keyword">implements</span> <span class="title">UserDao</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在业务层接口的实现类中添加一个属性，该属性为数据访问层对象-UserServiceImpl.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.plasmacookie.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.plasmacookie.dao.UserDao;</span><br><span class="line"><span class="keyword">import</span> com.plasmacookie.service.UserService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserDao</span><span class="params">(UserDao userDao)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userDao = userDao;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在beans配置文件中配置 数据访问层实现类的信息 及 业务层与数据访问层bean之间的关系-beans.xml</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 在这里配置您的bean --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.plasmacookie.service.impl.UserServiceImpl&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.plasmacookie.dao.impl.UserDaoImpl&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><em><strong>注意！！！</strong></em> property标签中ref属性为userDao的bean标签的id；name属性为UserDaoImpl.java中的setter方法名</p>
+<p><strong>运行代码</strong><br><img src="UserService内有UserDao.png" >  </p>
+<p>以debug方式再次运行代码，可以看到userService对象的userDao属性不为空。说明程序创建了userDao对象，并自动将userDao设置给了userService</p>
+<h2 id="ApplicationContext快速入门"><a href="#ApplicationContext快速入门" class="headerlink" title="ApplicationContext快速入门"></a>ApplicationContext快速入门</h2><p>ApplicationContext 又称作Spring上下文，内部封装了BeanFactory，比BeanFactory功能更强大更丰富。<br>在Spring基础环境下，常用的三个ApplicationContext实现类如下：</p>
+<table>
+<thead>
+<tr>
+<th>实现类</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ClassPathXmlApplicationContext</td>
+<td>从类路径(classpath)加载 XML 配置文件的 ApplicationContext 实现</td>
+</tr>
+<tr>
+<td>FileSystemXmlApplicationContext</td>
+<td>从文件系统路径加载 XML 配置文件的 ApplicationContext 实现</td>
+</tr>
+<tr>
+<td>AnnotationConfigApplicationContext</td>
+<td>基于 Java 注解配置的 ApplicationContext 实现，支持 @Configuration 类</td>
+</tr>
+</tbody></table>
+<h3 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h3><p><strong>项目文件结构</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">spring-ioc-test01/</span><br><span class="line">├── src/</span><br><span class="line">│    └── main/</span><br><span class="line">│         ├── java/</span><br><span class="line">|         |     └── com/plasmacookie/</span><br><span class="line">|         |                  ├── dao/</span><br><span class="line">|         |                  |    ├── impl/</span><br><span class="line">|         |                  |    |     └── UserDaoImpl.java</span><br><span class="line">|         |                  |    └── UserDao.java</span><br><span class="line">|         |                  ├── service/</span><br><span class="line">|         |                  |    ├── impl/</span><br><span class="line">|         |                  |    |     └── UserServiceImpl.java</span><br><span class="line">|         |                  |    └── UserService.java</span><br><span class="line">|         |                  └── test/</span><br><span class="line">|         |                       ├── BeanFactoryTest.java</span><br><span class="line">|         |                       └── ApplicationContextTest.java</span><br><span class="line">|         └── resources/</span><br><span class="line">|               └── beans.xml</span><br><span class="line">└── pom.xml</span><br></pre></td></tr></table></figure>
+
+<p><strong>新增ApplicationContextTest.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.plasmacookie.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationContextTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建ApplicationContext，加载配置文件，实例化容器</span></span><br><span class="line">        ApplicationContext applicationContext = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">&quot;beans.xml&quot;</span>);</span><br><span class="line">        <span class="comment">// 根据beanname获取容器中的bean实例</span></span><br><span class="line">        Object userService = applicationContext.getBean(<span class="string">&quot;userService&quot;</span>);</span><br><span class="line">        System.out.println(userService);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.plasmacookie.service.impl.UserServiceImpl@520a3426</span><br></pre></td></tr></table></figure>
+
+<p>可以看到控制台打印出了userService的地址，说明获取bean成功。</p>
+<h2 id="BeanFactory与ApplicationContext的关系"><a href="#BeanFactory与ApplicationContext的关系" class="headerlink" title="BeanFactory与ApplicationContext的关系"></a>BeanFactory与ApplicationContext的关系</h2><ol>
+<li>ApplicationContext包含了BeanFactory的所有功能，并且增加了国际化、资源访问、事件机制等高级特性</li>
+<li>bean加载时机不同，BeanFactory只有在实际使用到某个bean时才创建这个bean，而ApplicationContext则在容器启动时就创建所有的bean</li>
+<li>ApplicationContext不仅继承了BeanFactory，而且 ApplicationContext内部维护着BeanFactory实例</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" rel="tag"># 软件开发</a>
+              <a href="/tags/%E9%BB%91%E9%A9%AC%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag"># 黑马程序员</a>
+          </div>
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9FJava-Web%E5%BC%80%E5%8F%91%E5%9B%B0%E6%83%91%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">传统Java Web开发困惑及解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.1.</span> <span class="nav-text">代码示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">代码示例中出现的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IoC%E3%80%81DI%E3%80%81AOP%E6%A6%82%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">IoC、DI、AOP概要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IoC%E6%80%9D%E6%83%B3"><span class="nav-number">2.1.</span> <span class="nav-text">IoC思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DI%E6%80%9D%E6%83%B3"><span class="nav-number">2.2.</span> <span class="nav-text">DI思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP%E6%80%9D%E6%83%B3"><span class="nav-number">2.3.</span> <span class="nav-text">AOP思想</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Framework%E6%8A%80%E6%9C%AF%E6%A0%88%E5%9B%BE"><span class="nav-number">3.</span> <span class="nav-text">Spring Framework技术栈图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanFactory%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">4.</span> <span class="nav-text">BeanFactory快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanFactory%E7%9A%84%E8%BF%90%E8%A1%8C%E9%80%BB%E8%BE%91"><span class="nav-number">4.1.</span> <span class="nav-text">BeanFactory的运行逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B1-IoC%E6%80%9D%E6%83%B3%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.2.</span> <span class="nav-text">代码实例1 IoC思想简单实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B2-DI%E6%80%9D%E6%83%B3%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.3.</span> <span class="nav-text">代码实例2 DI思想简单实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ApplicationContext%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">5.</span> <span class="nav-text">ApplicationContext快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.1.</span> <span class="nav-text">代码实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanFactory%E4%B8%8EApplicationContext%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">6.</span> <span class="nav-text">BeanFactory与ApplicationContext的关系</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plasmacookie"
+      src="/images/85491458.jfif">
+  <p class="site-author-name" itemprop="name">plasmacookie</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plasmacookie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : '',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'b0715df9370523a18ee6',
+      clientSecret: 'ee8b5a67399a4d78f69073aa9abaa5ae67e2dab0',
+      repo        : 'plasmacookie.github.io',
+      owner       : 'plasmacookie',
+      admin       : ['plasmacookie'],
+      id          : '26ff124399e6ced1b6c822f152b10d48',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
+<!--动态线条背景-->
+<script type="text/javascript"
+color="100,100,100" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<script src="/live2d-widget/dist/autoload.js"></script>
