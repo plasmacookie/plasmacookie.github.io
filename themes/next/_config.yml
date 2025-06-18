@@ -809,11 +809,10 @@ pdf:
   # Default height
   height: 500px
 
-# Mermaid tag
-mermaid:
-  enable: false
-  # Available themes: default | dark | forest | neutral
-  theme: forest
+# mermaid chart
+mermaid: ## mermaid url https://github.com/knsv/mermaid
+  enable: true  # default true
+  version: "7.1.2" # default v7.1.2
 
 
 # ---------------------------------------------------------------

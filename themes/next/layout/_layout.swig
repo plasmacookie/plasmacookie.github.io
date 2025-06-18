@@ -11,7 +11,6 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-<script defer src="/live2d-widget/autoload.js"></script>
   <div class="container{%- if theme.motion.enable %} use-motion{%- endif %}">
     <div class="headband"></div>
 
@@ -64,3 +63,4 @@
 <script type="text/javascript"
 color="100,100,100" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
 </script>
+<script src="/live2d-widget/dist/autoload.js"></script>
