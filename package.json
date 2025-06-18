@@ -32,6 +32,7 @@
     "live2d-widget-model-hibiki": "^1.0.5",
     "live2d-widget-model-ni-j": "^1.0.5",
     "live2d-widget-model-nipsilon": "^1.0.5",
-    "live2d-widget-model-shizuku": "^1.0.5"
+    "live2d-widget-model-shizuku": "^1.0.5",
+    "marked": "^15.0.12"
   }
 }

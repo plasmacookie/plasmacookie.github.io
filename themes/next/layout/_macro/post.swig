@@ -165,7 +165,7 @@
           {%- endif %}
 
           {%- if post.description and (not theme.excerpt_description or not is_index) %}
-            <div class="post-description">{{ post.description }}</div>
+            <div class="post-description">{{ marked(post.description) | safe }}</div>
           {%- endif %}
 
         </div>
@@ -188,7 +188,7 @@
 
       {%- if is_index %}
         {%- if post.description and theme.excerpt_description %}
-          <p>{{ post.description }}</p>
+          <p>{{ marked(post.description) | safe }}</p>
           <!--noindex-->
           {%- if theme.read_more_btn %}
             <div class="post-button">
