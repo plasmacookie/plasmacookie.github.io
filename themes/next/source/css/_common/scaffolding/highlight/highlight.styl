@@ -86,7 +86,16 @@ code {
     width: 100%;
   }
 }
-
+.plaintext .code pre {
+    overflow-x: hidden !important;  /* 隐藏横向滚动条 */
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    padding: 10px !important;
+    width: calc(100% - 20px) !important;
+}
+.plaintext .gutter pre {
+    display: none !important;
+}
 .gist table {
   width: auto;
 
