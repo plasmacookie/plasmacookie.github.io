@@ -1,8 +1,8 @@
 https://plasmacookie.github.io/2026/08/24/0829/
 https://plasmacookie.github.io/tags/index.html
 https://plasmacookie.github.io/live2d-widget/tsconfig.json
-https://plasmacookie.github.io/live2d-widget/package.json
 https://plasmacookie.github.io/live2d-widget/renovate.json
+https://plasmacookie.github.io/live2d-widget/package.json
 https://plasmacookie.github.io/live2d-widget/dist/waifu-tips.json
 https://plasmacookie.github.io/live2d-widget/README.html
 https://plasmacookie.github.io/live2d-widget/demo/demo.html
